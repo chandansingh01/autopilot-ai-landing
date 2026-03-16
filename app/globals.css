@@ -1,19 +1,108 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --ink: #1a1a2e;
+  --ink-light: #2d2d44;
+  --ink-muted: #6b6b80;
+  --cream: #faf8f5;
+  --cream-dark: #f0ece6;
+  --amber: #c8841d;
+  --amber-light: #e6a93c;
+  --amber-glow: #c8841d18;
+  --teal: #1a8a7a;
+  --teal-light: #2bb5a0;
+  --surface: #ffffff;
+  --border: #e8e4de;
+  --border-light: #f0ece6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--cream);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
 }
+
+::selection {
+  background: var(--amber);
+  color: white;
+}
+
+/* Noise texture overlay */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Animated flow line */
+@keyframes flow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.flow-line {
+  animation: flow 3s ease-in-out infinite;
+}
+
+/* Staggered fade-in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.7s ease-out forwards;
+  opacity: 0;
+}
+.fade-up-1 { animation-delay: 0.1s; }
+.fade-up-2 { animation-delay: 0.25s; }
+.fade-up-3 { animation-delay: 0.4s; }
+.fade-up-4 { animation-delay: 0.55s; }
+
+/* Subtle pulse for CTA */
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 132, 29, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(200, 132, 29, 0); }
+}
+.pulse-cta {
+  animation: pulse-soft 2.5s ease-in-out infinite;
+}
+
+/* Step connector line */
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Workflow node glow */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }

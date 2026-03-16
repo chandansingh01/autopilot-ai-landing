@@ -1,21 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Serif_Display, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const serif = DM_Serif_Display({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sans = IBM_Plex_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "AutoPilot AI — Digital Workers for Indian Businesses",
+  title: "AutoPilot AI — We Automate Your Busywork",
   description:
-    "AI-powered automation workflows that handle lead qualification, invoice processing, customer follow-ups, and appointment reminders. Save 20+ hours/week.",
+    "AI automation agency for Indian businesses. We build Digital Workers that handle invoices, follow-ups, lead scoring, and appointment reminders — so your team can focus on real work.",
 };
 
 export default function RootLayout({
@@ -26,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${serif.variable} ${sans.variable} ${mono.variable} antialiased`}
       >
         {children}
       </body>
