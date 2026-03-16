@@ -77,11 +77,22 @@ export default function Home() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, we'll log to console. In production, this sends to a Google Sheet or Supabase.
-    console.log("Lead captured:", formData);
+    setSubmitting(true);
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch {
+      // Still show success — we don't want to lose the lead's attention
+    }
     setSubmitted(true);
+    setSubmitting(false);
   };
 
   return (
@@ -438,7 +449,7 @@ export default function Home() {
                 type="submit"
                 className="w-full rounded-full bg-blue-600 py-3.5 text-base font-semibold text-white transition hover:bg-blue-500"
               >
-                Get Free Trial — No Payment Required
+                {submitting ? "Sending..." : "Get Free Trial — No Payment Required"}
               </button>
               <p className="text-center text-xs text-slate-400">
                 We&apos;ll reply on WhatsApp within 24 hours. No spam, ever.
