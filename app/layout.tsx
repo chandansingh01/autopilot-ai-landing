@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import Analytics from "./components/Analytics";
 import "./globals.css";
 
 const serif = DM_Serif_Display({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${serif.variable} ${sans.variable} ${mono.variable} antialiased`}
       >
+        <Analytics />
         {children}
       </body>
     </html>
