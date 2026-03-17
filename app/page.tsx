@@ -265,6 +265,9 @@ export default function Home() {
             <a href="#how" className="hidden sm:block text-sm" style={{ color: "var(--ink-muted)" }}>
               How it works
             </a>
+            <a href="/roi" className="hidden sm:block text-sm" style={{ color: "var(--ink-muted)" }}>
+              ROI Calculator
+            </a>
             <a
               href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20AutoPilot%20AI"
               target="_blank"
@@ -344,6 +347,19 @@ export default function Home() {
               }}
             >
               See what we automate
+            </a>
+            <a
+              href="/roi"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium transition-all"
+              style={{
+                background: "transparent",
+                color: "var(--ink-muted)",
+                borderRadius: "2px",
+                textDecoration: "underline",
+                textUnderlineOffset: "4px",
+              }}
+            >
+              Calculate your ROI
             </a>
           </div>
 
